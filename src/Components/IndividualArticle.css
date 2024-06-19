@@ -1,10 +1,12 @@
 .article-container {
-    max-width: 95%;
+    max-width: 100%;
     margin: 0 auto;
     padding: 20px;
     background-color: ivory;
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    box-sizing: border-box;
+    padding: 0 20px;
 }
 
 .article-container h2 {
@@ -22,6 +24,24 @@
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto 10px; /* Center the image */
+    margin: 0 auto 10px;
     border-radius: 8px;
+}
+
+@media only screen and (min-width: 600px) {
+    .article-container {
+        max-width: 90%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .article-container {
+        max-width: 80%;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .article-container {
+        max-width: 70%;
+    }
 }

@@ -5,7 +5,7 @@
     align-items: center;
     padding: 20px;
     background-color: rgb(217, 1, 1);
-    color: ivory; 
+    color: ivory;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
 }
@@ -30,4 +30,22 @@
 .home-button:hover {
     background-color: rgb(223, 2, 2);
     color: ivory;
+}
+
+@media only screen and (min-width: 600px) {
+    .header {
+        padding: 20px 10%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .header {
+        padding: 20px 10%;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .header {
+        padding: 20px 15%;
+    }
 }
