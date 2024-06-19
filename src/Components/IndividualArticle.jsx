@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import './IndividualArticle.css'
 import Header from "./Header";
+import CommentSection from "./CommentSection";
 
 const ncNewsAPI = axios.create({
     baseURL: "https:/nc-news-be-project-1.onrender.com/api"
@@ -43,8 +44,11 @@ function IndividualArticle() {
                 <p>{new Date(article.created_at).toLocaleDateString()}</p>
                 <img src={article.article_img_url} alt={`Image for ${article.title}`} />
                 <p>{article.body}</p>
-                <p>Comments: {article.comment_count}</p>
-                <p>Votes: {article.votes}</p>
+                <div className="counts-container">
+                <p><strong>Comments: {article.comment_count}</strong></p>
+                <p><strong>Votes: {article.votes}</strong></p>
+                </div>
+                <CommentSection articleId={article_id} />
             </div>
             )}
         </div>

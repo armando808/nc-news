@@ -1,0 +1,28 @@
+.comment-section {
+    margin-top: 20px;
+}
+
+.comments-container {
+    transition: max-height 0.3s ease;
+}
+
+.comment {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.comment-section button {
+    background-color: rgb(217, 1, 1) !important;
+    color: ivory !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    font-size: 1rem !important;
+    cursor: pointer !important;
+    border-radius: 5px !important;
+    margin-top: 10px !important;
+}
+
+.comment-section button:hover {
+    background-color: rgb(173, 0, 0) !important; 
+    color: ivory !important;
+}
