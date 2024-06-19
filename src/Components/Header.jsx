@@ -1,11 +1,11 @@
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
     return (
         <header className='header'>
             <h1>NC News</h1>
-            <button className='home-button'>Home</button>
+            <Link to="/" className='home-button'>Home</Link>
         </header>
     )
 }
