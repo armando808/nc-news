@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import './ArticlesPage.css'
 import Header from "./Header";
+
+const ncNewsAPI = axios.create({
+    baseURL: "https:/nc-news-be-project-1.onrender.com/api"
+})
 
 function ArticlesPage() {
     const [articlesState, setArticlesState] = useState([])
@@ -11,9 +15,6 @@ function ArticlesPage() {
     const [selectedTopic, setSelectedTopic] = useState('')
     const [topics, setTopics] = useState([])
 
-    const ncNewsAPI = axios.create({
-        baseURL: "https:/nc-news-be-project-1.onrender.com/api"
-    })
 
     useEffect(() => {
         const fetchArticles = async () => {
