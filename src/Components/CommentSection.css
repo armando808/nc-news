@@ -1,28 +1,75 @@
 .comment-section {
-    margin-top: 20px;
+    margin-top: 20px !important;
 }
 
-.comments-container {
-    transition: max-height 0.3s ease;
+.comment-form {
+    display: flex !important;
+    flex-direction: column !important;
+    margin-bottom: 10px !important;
 }
 
-.comment {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+.comment-form textarea {
+    padding: 10px !important;
+    margin-bottom: 10px !important;
+    border-radius: 5px !important;
+    border: 1px solid #ccc !important;
+    resize: vertical !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+    width: calc(100% - 20px) !important;
+    margin: 0 auto !important;
 }
 
-.comment-section button {
+.comment-form button {
+    align-self: center !important;
     background-color: rgb(217, 1, 1) !important;
-    color: ivory !important;
+    color: white !important;
     border: none !important;
     padding: 10px 20px !important;
     font-size: 1rem !important;
     cursor: pointer !important;
     border-radius: 5px !important;
+    transition: background-color 0.3s, color 0.3s !important;
+    margin-top: 10px;
+}
+
+.comment-form button:hover {
+    background-color: rgb(223, 2, 2) !important;
+    color: white !important;
+}
+
+.toggle-button {
+    background-color: rgb(217, 1, 1) !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    font-size: 1rem !important;
+    cursor: pointer !important;
+    border-radius: 5px !important;
+    transition: background-color 0.3s, color 0.3s !important;
     margin-top: 10px !important;
 }
 
-.comment-section button:hover {
-    background-color: rgb(173, 0, 0) !important; 
-    color: ivory !important;
+.toggle-button:hover {
+    background-color: rgb(223, 2, 2) !important;
+    color: white !important;
+}
+
+.comments-container {
+    transition: max-height 0.3s ease !important;
+}
+
+.comment {
+    padding: 10px !important;
+    border-bottom: 1px solid #ccc !important;
+}
+
+.success-message {
+    color: green !important;
+    margin-bottom: 10px !important;
+}
+
+.error-message {
+    color: red !important;
+    margin-bottom: 10px !important;
 }

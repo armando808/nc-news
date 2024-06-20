@@ -6,7 +6,7 @@
 }
 
 .vote-button {
-    background-color: ivory;
+    background-color: white;
     border: 1px solid rgb(217, 1, 1);
     border-radius: 8px;
     color: rgb(217, 1, 1);
@@ -19,12 +19,12 @@
 
 .vote-button.selected {
     background-color: rgb(217, 1, 1); 
-    color: ivory; 
+    color: white; 
 }
 
 .vote-button:hover {
     background-color: rgb(223, 2, 2);
-    color: ivory;
+    color: white;
 }
 
 .vote-count {
