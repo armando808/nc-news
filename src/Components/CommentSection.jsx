@@ -11,6 +11,7 @@ function CommentSection({ articleId }) {
     const [isLoading, setIsLoading] = useState(true);
     const [newComment, setNewComment] = useState("");
     const [postSuccess, setPostSuccess] = useState(null);
+    const [deleteSuccess, setDeleteSuccess] = useState(null)
 
     useEffect(() => {
         const fetchComments = async () => {
@@ -58,6 +59,19 @@ function CommentSection({ articleId }) {
         }
     };
 
+    const handleDeleteComment = async (commentId) => {
+        const remainingComments = comments.filter(comment => comment.comment_id !== commentId);
+        setComments(remainingComments);
+        setDeleteSuccess("Your comment has been deleted!");
+
+        try {
+            await axios.delete(`https://nc-news-be-project-1.onrender.com/api/comments/${commentId}`);
+        } catch (err) {
+            setError("Sorry! There was an error deleting the comment - please try again.");
+            setComments(comments);
+        }
+    };
+
     const visibleComments = commentsExpanded ? comments : comments.slice(0, 2);
 
     return (
@@ -77,15 +91,24 @@ function CommentSection({ articleId }) {
                         <button type="submit">Post Comment</button>
                     </form>
                     {postSuccess && <p className="success-message">{postSuccess}</p>}
+                    {deleteSuccess && <p className="success-message">{deleteSuccess}</p>}
                     {error && <p className="error-message">{error}</p>}
                     <button className="toggle-button" onClick={() => setCommentsExpanded(!commentsExpanded)}>
                         {commentsExpanded ? 'Show Less' : 'Show All Comments'}
                     </button>
                     <section className="comments-container">
                         {visibleComments.map((comment, index) => (
-                            <article key={index} className="comment">
+                            <article key={comment.comment_id} className="comment">
                                 <p><strong>{comment.author}</strong>: {comment.body}</p>
                                 <p>{new Date(comment.created_at).toLocaleDateString()}</p>
+                                {comment.author === username && (
+                                    <button
+                                    className="delete-button"
+                                    onClick={() => handleDeleteComment(comment.comment_id)}
+                                    >
+                                    Delete comment
+                                    </button>
+                                )}
                             </article>
                         ))}
                     </section>
