@@ -73,3 +73,20 @@
     color: red !important;
     margin-bottom: 10px !important;
 }
+
+.delete-button {
+    align-self: flex-end !important;
+    background-color: rgb(217, 1, 1) !important;
+    color: white !important;
+    border: none !important;
+    padding: 5px 10px !important;
+    font-size: 1rem !important;
+    cursor: pointer !important;
+    border-radius: 5px !important;
+    transition: background-color 0.3s, color 0.3s !important;
+}
+
+.delete-button:hover {
+    background-color: rgb(223, 2, 2) !important;
+    color: white !important;
+}
