@@ -43,14 +43,14 @@ const handleVote = async (increment) => {
                 className={`vote-button downvote ${voteStatus === 'downvoted' ? 'selected' : ''}`} 
                 onClick={() => handleVote(-1)}
             >
-                -
+                <strong>-</strong>
             </button>
-            <span className="vote-count">Votes: {votes}</span>
+            <span className="vote-count"><strong>Votes: {votes}</strong></span>
             <button 
                 className={`vote-button upvote ${voteStatus === 'upvoted' ? 'selected' : ''}`} 
                 onClick={() => handleVote(1)}
             >
-                +
+                <strong>+</strong>
             </button>
             {error && <p className="error-message">{error}</p>}
         </section>
