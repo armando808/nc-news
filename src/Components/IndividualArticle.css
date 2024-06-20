@@ -5,33 +5,29 @@
     background-color: ivory;
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  }
-  
-  .article-container h2 {
+}
+
+.article-container h2 {
     margin-bottom: 10px;
     font-size: 1.5rem;
     text-align: center;
-  }
-  
-  .article-container p {
+}
+
+.article-container p {
     margin-bottom: 5px;
     text-align: center;
-  }
-  
-  .article-container img {
+}
+
+.article-container img {
     max-width: 100%;
     height: auto;
     display: block;
     margin: 0 auto 10px; 
     border-radius: 8px;
-  }
-  
-  .counts-container {
+}
+
+.votes-container {
     display: flex;
     justify-content: center;
-    gap: 20px;
-  }
-  
-  .counts-container p {
-    margin: 0;
-  }
+    margin-bottom: 10px;
+}

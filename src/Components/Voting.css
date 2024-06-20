@@ -1,0 +1,40 @@
+.voting-component {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.vote-button {
+    background-color: ivory;
+    border: 1px solid rgb(217, 1, 1);
+    border-radius: 8px;
+    color: rgb(217, 1, 1);
+    font-size: 1rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.vote-button.selected {
+    background-color: rgb(217, 1, 1); 
+    color: ivory; 
+}
+
+.vote-button:hover {
+    background-color: rgb(223, 2, 2);
+    color: ivory;
+}
+
+.vote-count {
+    margin: 0;
+    color: black;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
