@@ -97,7 +97,7 @@ function HomePage() {
                                     </li>
                                 ))}
                             </ul>
-                            <Link to={`/topics/${topic.slug}`} className="view-all-link">
+                            <Link to={`/articles?topic=${topic.slug}`} className="view-all-link">
                                 View all articles on {capitalizeTitle(topic.slug)}
                             </Link>
                         </div>
