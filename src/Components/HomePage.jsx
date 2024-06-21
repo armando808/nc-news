@@ -18,9 +18,10 @@ function HomePage() {
                 setTopics(response.data.topics)
             } catch (err) {
                 console.error(err)
-                setError(err.message)
+                setError(err.response && err.response.data && err.response.data.msg ? err.response.data.msg : err.message)
+                setIsLoading(false)
             }
-        };
+        }
 
         fetchTopics()
     }, [])
@@ -43,13 +44,13 @@ function HomePage() {
                 setIsLoading(false)
             } catch (err) {
                 console.error(err)
-                setError(err.message)
+                setError(err.response && err.response.data && err.response.data.msg ? err.response.data.msg : err.message)
                 setIsLoading(false)
             }
         }
 
         if (topics.length > 0) {
-            fetchArticles()
+            fetchArticles();
         }
     }, [topics, selectedView])
 
@@ -109,3 +110,4 @@ function HomePage() {
 }
 
 export default HomePage
+

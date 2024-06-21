@@ -1,37 +1,38 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
-import './CommentSection.css'
-import { useUser } from "../UserContext"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import './CommentSection.css';
+import { useUser } from "../UserContext";
 
 function CommentSection({ articleId }) {
-    const { username } = useUser()
-    const [comments, setComments] = useState([])
-    const [commentsExpanded, setCommentsExpanded] = useState(false)
-    const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
-    const [newComment, setNewComment] = useState("")
-    const [postSuccess, setPostSuccess] = useState(null)
-    const [deleteSuccess, setDeleteSuccess] = useState(null)
+    const { username } = useUser();
+    const [comments, setComments] = useState([]);
+    const [commentsExpanded, setCommentsExpanded] = useState(false);
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [newComment, setNewComment] = useState("");
+    const [postSuccess, setPostSuccess] = useState(null);
+    const [deleteSuccess, setDeleteSuccess] = useState(null);
+    const [pendingComments, setPendingComments] = useState([]);
 
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const response = await axios.get(`https://nc-news-be-project-1.onrender.com/api/articles/${articleId}/comments`)
-                setComments(response.data.comments)
-                setIsLoading(false)
+                const response = await axios.get(`https://nc-news-be-project-1.onrender.com/api/articles/${articleId}/comments`);
+                setComments(response.data.comments);
+                setIsLoading(false);
             } catch (err) {
-                setError(err.message)
-                setIsLoading(false)
+                setError(err.message);
+                setIsLoading(false);
             }
         };
 
-        fetchComments()
-    }, [articleId])
+        fetchComments();
+    }, [articleId]);
 
     const handleCommentSubmit = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
         if (/^\s*$/.test(newComment)) {
-            setError("Comment cannot be empty.")
+            setError("Comment cannot be empty.");
             return;
         }
 
@@ -39,44 +40,58 @@ function CommentSection({ articleId }) {
             author: username,
             body: newComment,
             created_at: new Date().toISOString(),
-            votes: 0
+            votes: 0,
+            isPending: true,
         };
 
-        setComments([newCommentObject, ...comments])
-        setNewComment("")
-        setPostSuccess("Your comment has been posted!")
-        setError(null)
+        setPendingComments([newCommentObject, ...pendingComments]);
+        setNewComment("");
+        setPostSuccess("Your comment has been posted!");
+        setError(null);
 
         try {
-            await axios.post(`https://nc-news-be-project-1.onrender.com/api/articles/${articleId}/comments`, {
+            const response = await axios.post(`https://nc-news-be-project-1.onrender.com/api/articles/${articleId}/comments`, {
                 username,
                 body: newComment
-            })
-            setPostSuccess("Your comment has been posted!")
+            });
+            const postedComment = response.data.comment;
+            setPendingComments(pendingComments.filter(comment => comment !== newCommentObject));
+            setComments([postedComment, ...comments]);
+            setPostSuccess("Your comment has been posted!");
         } catch (err) {
-            setError("Sorry! There was an error posting the comment - please try again.")
-            setComments(comments)
+            setError("Sorry! There was an error posting the comment - please try again.");
+            setPendingComments(pendingComments.filter(comment => comment !== newCommentObject));
         }
     };
 
-    const handleDeleteComment = async (commentId) => {
-        const remainingComments = comments.filter(comment => comment.comment_id !== commentId)
-        setComments(remainingComments)
-        setDeleteSuccess("Your comment has been deleted!")
+    const handleDeleteComment = async (commentId, isPending) => {
+        if (isPending) {
+            setPendingComments(pendingComments.filter(comment => comment.created_at !== commentId));
+        } else {
+            setComments(comments.filter(comment => comment.comment_id !== commentId));
+        }
+        setDeleteSuccess("Your comment has been deleted!");
+        setError(null);
 
         try {
-            await axios.delete(`https://nc-news-be-project-1.onrender.com/api/comments/${commentId}`)
+            if (!isPending) {
+                await axios.delete(`https://nc-news-be-project-1.onrender.com/api/comments/${commentId}`);
+            }
         } catch (err) {
-            setError("Sorry! There was an error deleting the comment - please try again.")
-            setComments(comments)
+            setError("Sorry! There was an error deleting the comment - please try again.");
+            if (isPending) {
+                setPendingComments(pendingComments);
+            } else {
+                setComments(comments);
+            }
         }
-    }
+    };
 
-    const visibleComments = commentsExpanded ? comments : comments.slice(0, 2)
+    const visibleComments = commentsExpanded ? comments.concat(pendingComments) : comments.concat(pendingComments).slice(0, 2);
 
     return (
         <section className="comment-section">
-            <h3>Comments: {comments.length}</h3>
+            <h3>Comments: {comments.length + pendingComments.length}</h3>
             {isLoading ? (
                 <p>Loading comments...</p>
             ) : (
@@ -88,7 +103,7 @@ function CommentSection({ articleId }) {
                             placeholder="Post your comment here..."
                             required
                         />
-                        <button type="submit">Post Comment</button>
+                        <button type="submit" disabled={pendingComments.length > 0}>Post Comment</button>
                     </form>
                     {postSuccess && <p className="success-message">{postSuccess}</p>}
                     {deleteSuccess && <p className="success-message">{deleteSuccess}</p>}
@@ -98,15 +113,15 @@ function CommentSection({ articleId }) {
                     </button>
                     <section className="comments-container">
                         {visibleComments.map((comment, index) => (
-                            <article key={comment.comment_id} className="comment">
+                            <article key={comment.comment_id || comment.created_at} className="comment">
                                 <p><strong>{comment.author}</strong>: {comment.body}</p>
                                 <p>{new Date(comment.created_at).toLocaleDateString()}</p>
                                 {comment.author === username && (
                                     <button
-                                    className="delete-button"
-                                    onClick={() => handleDeleteComment(comment.comment_id)}
+                                        className="delete-button"
+                                        onClick={() => handleDeleteComment(comment.comment_id || comment.created_at, comment.isPending)}
                                     >
-                                    Delete comment
+                                        Delete comment
                                     </button>
                                 )}
                             </article>
@@ -118,4 +133,4 @@ function CommentSection({ articleId }) {
     );
 }
 
-export default CommentSection
+export default CommentSection;

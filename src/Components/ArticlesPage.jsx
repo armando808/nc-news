@@ -30,31 +30,31 @@ function ArticlesPage() {
     useEffect(() => {
         const fetchArticles = async () => {
             try {
-                setIsLoading(true)
-                const params = {}
-
+                setIsLoading(true);
+                const params = {};
+            
                 if (selectedOption === 'newest') {
-                    params.sort_by = 'created_at'
-                    params.order = 'desc'
+                    params.sort_by = 'created_at';
+                    params.order = 'desc';
                 } else if (selectedOption === 'oldest') {
-                    params.sort_by = 'created_at'
-                    params.order = 'asc'
+                    params.sort_by = 'created_at';
+                    params.order = 'asc';
                 } else if (selectedOption === 'most_popular') {
-                    params.sort_by = 'votes'
-                    params.order = 'desc'
+                    params.sort_by = 'votes';
+                    params.order = 'desc';
                 } else if (selectedOption === 'least_popular') {
-                    params.sort_by = 'votes'
-                    params.order = 'asc'
+                    params.sort_by = 'votes';
+                    params.order = 'asc';
                 } else if (selectedOption.startsWith('topic_')) {
-                    params.topic = selectedOption.replace('topic_', '')
+                    params.topic = selectedOption.replace('topic_', '');
                 }
-
-                const response = await ncNewsAPI.get('/articles', { params })
-                setArticlesState(response.data.articles)
-                setIsLoading(false)
+            
+                const response = await ncNewsAPI.get('/articles', { params });
+                setArticlesState(response.data.articles);
+                setIsLoading(false);
             } catch (err) {
-                setError(err.message)
-                setIsLoading(false)
+                setError(err.response && err.response.data && err.response.data.msg ? err.response.data.msg : err.message);
+                setIsLoading(false);
             }
         }
 
@@ -67,7 +67,7 @@ function ArticlesPage() {
                 const response = await ncNewsAPI.get('/topics')
                 setTopics(response.data.topics)
             } catch (err) {
-                setError(err.message)
+                setError(err.response && err.response.data && err.response.data.msg ? err.response.data.msg : err.message)
             }
         }
         fetchTopics()
@@ -82,7 +82,7 @@ function ArticlesPage() {
             .toLowerCase()
             .split(' ')
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ')
+            .join(' ');
     }
 
     const formatPageTitle = () => {
@@ -144,3 +144,4 @@ function ArticlesPage() {
 }
 
 export default ArticlesPage
+
