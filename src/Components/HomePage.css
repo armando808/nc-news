@@ -1,0 +1,127 @@
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+h2 {
+    margin: 0;
+}
+
+.topics-header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.topics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.topic-card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.topic-card:hover {
+    background-color: #f9f9f9c7;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 6px;
+}
+
+.topic-card h3 {
+    margin-top: 0;
+    text-transform: capitalize;
+}
+
+.topic-card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.topic-card li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.topic-card li img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.topic-card a {
+    color: rgb(217, 1, 1);
+    text-decoration: none;
+}
+
+.topic-card a:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+.topic-card .article-img {
+    max-width: 50px;
+    max-height: 50px;
+    margin-right: 10px;
+}
+
+.view-all-link {
+    display: block;
+    margin-top: 10px;
+    color: rgb(217, 1, 1);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.view-all-link:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+@media (max-width: 600px) {
+    .topic-card {
+        width: 100%;
+    }
+
+    .topic-card li img {
+        display: none;
+    }
+}
+
+.toggle-view {
+    display: flex;
+    gap: 10px;
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    color: rgb(217, 1, 1);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0 10px;
+}
+
+.toggle-button.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.toggle-button:hover {
+    text-decoration: underline;
+}

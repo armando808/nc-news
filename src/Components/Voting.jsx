@@ -1,5 +1,5 @@
-import { useState } from "react";
-import axios from "axios";
+import { useState } from "react"
+import axios from "axios"
 import './Voting.css'
 
 function Voting({ article_id, initialVotes}) {
@@ -8,8 +8,8 @@ function Voting({ article_id, initialVotes}) {
     const [error, setError] = useState(null)
 
 const handleVote = async (increment) => {
-        const newVoteStatus = increment > 0 ? 'upvoted' : 'downvoted';
-        const reverseVoteStatus = increment > 0 ? 'downvoted' : 'upvoted';
+        const newVoteStatus = increment > 0 ? 'upvoted' : 'downvoted'
+        const reverseVoteStatus = increment > 0 ? 'downvoted' : 'upvoted'
 
         try {
             if (voteStatus === newVoteStatus) {
@@ -36,7 +36,7 @@ const handleVote = async (increment) => {
         } catch (err) {
             setError('Error while updating vote')
         }
-    };
+    }
     return (
         <section className="voting-component">
             <button 
@@ -54,7 +54,7 @@ const handleVote = async (increment) => {
             </button>
             {error && <p className="error-message">{error}</p>}
         </section>
-    );
+    )
 }
 
 
