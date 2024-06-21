@@ -19,12 +19,12 @@ function IndividualArticle() {
     useEffect(() => {
         const fetchArticle = async () => {
             try {
-                setIsLoading(true)
+                setIsLoading(true);
                 const response = await ncNewsAPI.get(`/articles/${article_id}`)
                 setArticle(response.data.article)
                 setIsLoading(false)
             } catch (err) {
-                setError(err.message)
+                setError(err.response && err.response.data && err.response.data.msg ? err.response.data.msg : err.message)
                 setIsLoading(false)
             }
         }
