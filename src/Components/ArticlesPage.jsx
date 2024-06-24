@@ -5,7 +5,7 @@ import './ArticlesPage.css'
 import Header from "./Header"
 
 const ncNewsAPI = axios.create({
-    baseURL: "https:/nc-news-be-project-1.onrender.com/api"
+    baseURL: "https://nc-news-be-project-1.onrender.com/api"
 })
 
 function useQuery() {
