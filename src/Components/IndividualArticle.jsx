@@ -7,7 +7,7 @@ import CommentSection from "./CommentSection"
 import Voting from "./Voting"
 
 const ncNewsAPI = axios.create({
-    baseURL: "https:/nc-news-be-project-1.onrender.com/api"
+    baseURL: "https://nc-news-be-project-1.onrender.com/api"
 })
 
 function IndividualArticle() {
