@@ -21,6 +21,9 @@ h2 {
     gap: 20px;
     justify-content: center;
     width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+    margin: 0 auto;
 }
 
 .topic-card {
@@ -30,9 +33,31 @@ h2 {
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     width: 100%;
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
     transition: background-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+
+@media only screen and (min-width: 600px) {
+    .topics-container, .topic-card {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .topics-container, .topic-card {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .topics-container, .topic-card {
+        max-width: 80%;
+        margin: 0 auto;
+    }
 }
 
 .topic-card:hover {
@@ -94,6 +119,10 @@ h2 {
 }
 
 @media (max-width: 600px) {
+    .topics-container {
+        padding: 0 10px;
+    }
+
     .topic-card {
         width: 100%;
     }
