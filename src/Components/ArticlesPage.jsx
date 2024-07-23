@@ -121,7 +121,7 @@ function ArticlesPage() {
                 </div>
             </div>
             {isLoading ? (
-                <p>Loading...</p>
+                <p>Loading... Please wait up to ~1 min for server to initialise</p>
             ) : error ? (
                 <p>Error: {error}</p>
             ) : (

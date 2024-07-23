@@ -93,7 +93,7 @@ function CommentSection({ articleId }) {
         <section className="comment-section">
             <h3>Comments: {comments.length + pendingComments.length}</h3>
             {isLoading ? (
-                <p>Loading comments...</p>
+                <p>Loading... Please wait up to ~1 min for server to initialise</p>
             ) : (
                 <>
                     <form onSubmit={handleCommentSubmit} className="comment-form">
