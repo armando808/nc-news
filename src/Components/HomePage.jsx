@@ -68,7 +68,7 @@ function HomePage() {
         <section>
             <Header />
             <div className="header-row">
-                <h2>NC News - Home</h2>
+                <h2>Home</h2>
                 <div className="toggle-view">
                     <button className={`toggle-button ${selectedView === 'popular' ? 'active' : ''}`} onClick={() => handleViewChange('popular')}>
                         {selectedView === 'popular' ? 'Showing Most Popular' : 'Show Most Popular'}
