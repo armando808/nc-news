@@ -27,11 +27,30 @@
     color: white;
 }
 
+.dark .vote-button {
+    background-color: rgb(217, 1, 1);
+    color: white;
+}
+
+.dark .vote-button:hover {
+    background-color: white;
+    color: rgb(217, 1, 1);
+}
+
+.dark .vote-button.selected {
+    background-color: white;
+    color: rgb(217, 1, 1);
+}
+
 .vote-count {
     margin: 0;
     color: black;
     font-size: 1rem;
     font-family: inherit;
+}
+
+.dark .vote-count {
+    color: white;
 }
 
 .error-message {

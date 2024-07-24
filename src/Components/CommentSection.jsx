@@ -90,7 +90,7 @@ function CommentSection({ articleId }) {
     const visibleComments = commentsExpanded ? comments.concat(pendingComments) : comments.concat(pendingComments).slice(0, 2);
 
     return (
-        <section className="comment-section">
+        <section className="comment-section mt-5">
             <h3>Comments: {comments.length + pendingComments.length}</h3>
             {isLoading ? (
                 <p>Loading... Please wait up to ~1 min for server to initialise</p>
@@ -102,23 +102,26 @@ function CommentSection({ articleId }) {
                             onChange={(e) => setNewComment(e.target.value)}
                             placeholder="Post your comment here..."
                             required
+                            className="bg-gray-100 dark:bg-gray-200 text-gray-900 dark:text-gray-900 border border-gray-300 dark:border-gray-600 rounded p-2 w-full"
                         />
-                        <button type="submit" disabled={pendingComments.length > 0}>Post Comment</button>
+                        <button type="submit" disabled={pendingComments.length > 0} className="bg-customRed text-white px-3 py-2 rounded-md transition duration-300 hover:bg-red-700">
+                            Post Comment
+                        </button>
                     </form>
                     {postSuccess && <p className="success-message">{postSuccess}</p>}
                     {deleteSuccess && <p className="success-message">{deleteSuccess}</p>}
                     {error && <p className="error-message">{error}</p>}
-                    <button className="toggle-button" onClick={() => setCommentsExpanded(!commentsExpanded)}>
+                    <button className="toggle-button bg-customRed text-white px-3 py-2 rounded-md transition duration-300 hover:bg-red-700" onClick={() => setCommentsExpanded(!commentsExpanded)}>
                         {commentsExpanded ? 'Show Less' : 'Show All Comments'}
                     </button>
-                    <section className="comments-container">
+                    <section className="comments-container mt-4">
                         {visibleComments.map((comment, index) => (
-                            <article key={comment.comment_id || comment.created_at} className="comment">
+                            <article key={comment.comment_id || comment.created_at} className="comment bg-gray-100 dark:bg-gray-200 text-gray-900 dark:text-gray-900 border border-gray-300 dark:border-gray-600 rounded p-3 mb-2">
                                 <p><strong>{comment.author}</strong>: {comment.body}</p>
                                 <p>{new Date(comment.created_at).toLocaleDateString()}</p>
                                 {comment.author === username && (
                                     <button
-                                        className="delete-button"
+                                        className="delete-button bg-customRed text-white px-3 py-2 rounded-md transition duration-300 hover:bg-red-700"
                                         onClick={() => handleDeleteComment(comment.comment_id || comment.created_at, comment.isPending)}
                                     >
                                         Delete comment

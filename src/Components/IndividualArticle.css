@@ -18,11 +18,17 @@
     text-align: center;
 }
 
-.article-container img {
-    max-width: 100%;
+.img-container {
+    max-width: 30%;
+    margin: 0 auto 10px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.article-img {
+    width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto 10px; 
     border-radius: 8px;
 }
 
@@ -30,4 +36,8 @@
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
+}
+
+.header-row {
+    margin-top: 20px;
 }
