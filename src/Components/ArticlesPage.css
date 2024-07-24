@@ -24,7 +24,7 @@
   
   .select-container select {
     appearance: none;
-    padding-right: 2.5rem; /* Space for the custom dropdown icon */
+    padding-right: 2.5rem;
   }
   
   .article-list {
@@ -46,7 +46,7 @@
     padding: 20px;
     background-color: white;
     border-radius: 8px;
-    box-shadow: var(--customShadow); /* Use custom shadow from Tailwind config */
+    box-shadow: var(--customShadow);
     box-sizing: border-box;
   }
   
@@ -126,7 +126,7 @@
   .topics-header {
     text-align: center;
     margin-top: 20px;
-    margin-bottom: 40px; /* Add this line */
+    margin-bottom: 40px;
   }
   
   .topics-container {
