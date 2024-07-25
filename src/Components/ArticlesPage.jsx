@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 import './ArticlesPage.css';
@@ -20,11 +20,14 @@ function ArticlesPage() {
   const [topics, setTopics] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('theme') === 'dark');
   const query = useQuery();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const topic = query.get('topic');
-    if (topic) {
+    if (topic && topic !== 'all') {
       setSelectedOption(`topic_${topic}`);
+    } else {
+      setSelectedOption('all');
     }
   }, [query]);
 
@@ -75,7 +78,13 @@ function ArticlesPage() {
   }, []);
 
   const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+    const value = event.target.value;
+    setSelectedOption(value);
+    if (value === 'all') {
+      navigate('/articles');
+    } else {
+      navigate(`/articles?topic=${value.replace('topic_', '')}`);
+    }
   };
 
   const formatTitle = (title) => {
@@ -133,7 +142,7 @@ function ArticlesPage() {
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-300">
               <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 01-1.414 0l-4-4a1 1 0 010-1.414z" />
               </svg>
             </div>
           </div>
