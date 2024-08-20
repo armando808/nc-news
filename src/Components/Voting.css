@@ -7,9 +7,9 @@
 
 .vote-button {
     background-color: white;
-    border: 1px solid rgb(217, 1, 1);
+    border: 1px solid #108470;
     border-radius: 8px;
-    color: rgb(217, 1, 1);
+    color: #108470;
     font-size: 1rem;
     padding: 10px 20px;
     cursor: pointer;
@@ -18,28 +18,28 @@
 }
 
 .vote-button.selected {
-    background-color: rgb(217, 1, 1); 
+    background-color: #108470; 
     color: white; 
 }
 
 .vote-button:hover {
-    background-color: rgb(223, 2, 2);
+    background-color: #108470;
     color: white;
 }
 
 .dark .vote-button {
-    background-color: rgb(217, 1, 1);
+    background-color: #108470;
     color: white;
 }
 
 .dark .vote-button:hover {
     background-color: white;
-    color: rgb(217, 1, 1);
+    color: #108470;
 }
 
 .dark .vote-button.selected {
     background-color: white;
-    color: rgb(217, 1, 1);
+    color: #108470;
 }
 
 .vote-count {

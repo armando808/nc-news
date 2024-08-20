@@ -90,7 +90,7 @@ h2 {
 }
 
 .topic-card a {
-  color: rgb(217, 1, 1);
+  color: #108470;
   text-decoration: none;
 }
 
@@ -109,14 +109,14 @@ h2 {
   display: block;
   margin-top: 10px;
   text-align: center;
-  color: rgb(217, 1, 1);
+  color: #108470;
   text-decoration: none;
   font-weight: bold;
 }
 
 .view-all-link:hover {
   text-decoration: underline;
-  color: rgb(223, 2, 2);
+  color: #108470;
 }
 
 .dark .view-all-link:hover {
@@ -145,7 +145,7 @@ h2 {
 .toggle-button {
   background: none;
   border: none;
-  color: rgb(217, 1, 1);
+  color: #108470;
   cursor: pointer;
   font-size: 1rem;
   padding: 0 10px;
@@ -161,7 +161,7 @@ h2 {
 }
 
 .spinner-border {
-  border-top-color: rgb(217, 1, 1);
+  border-top-color: #108470;
   border-right-color: transparent;
   border-bottom-color: transparent;
   border-left-color: transparent;
@@ -169,7 +169,7 @@ h2 {
 
 .loading-message {
   margin-top: 10px;
-  color: rgb(217, 1, 1);
+  color: #108470;
   font-weight: bold;
 }
 
@@ -188,4 +188,5 @@ h2 {
   box-sizing: border-box;
   padding: 0 20px;
   margin: 0 auto;
+  margin-bottom: 30px;
 }

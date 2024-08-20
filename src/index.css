@@ -7,7 +7,7 @@
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: #213547; 
+  color: #213547;
   background-color: white;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,7 +17,7 @@
 
 a {
   font-weight: 500;
-  color: rgb(217, 1, 1);
+  color: #108470;
   text-decoration: none;
 }
 
@@ -39,8 +39,8 @@ h1 {
 }
 
 button {
-  background-color: rgb(217, 1, 1);
-  border: 1px solid white;
+  background-color: #108470;
+  border: none; /* No border */
   border-radius: 8px;
   color: white;
   font-size: 1rem;
@@ -50,13 +50,13 @@ button {
 }
 
 button:hover {
-  background-color: rgb(223, 2, 2);
-  color: white;
+  background-color: #108470;
+  color: black; /* Change text color to black on hover */
 }
 
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: none; /* Removed focus outline */
 }
 
 @media (prefers-color-scheme: light) {
@@ -68,7 +68,7 @@ button:focus-visible {
     color: black;
   }
   button {
-    background-color: rgb(217, 1, 1);
+    background-color: #108470;
   }
 }
 

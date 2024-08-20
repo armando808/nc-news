@@ -34,3 +34,24 @@
     animation: logo-spin infinite 20s linear;
   }
 }
+
+button {
+  background-color: #108470;
+  border: none; /* No border */
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+  background-color: #108470;
+  color: black; /* Change text color to black on hover */
+}
+
+button:focus,
+button:focus-visible {
+  outline: none; /* Removed focus outline */
+}

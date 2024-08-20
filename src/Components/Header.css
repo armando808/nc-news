@@ -1,80 +1,80 @@
 .header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: rgb(217, 1, 1);
-    color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-  }
-  
-  .header h1 {
-    margin: 0;
-    font-size: 2rem;
-  }
-  
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #108470;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-button {
+  background-color: #108470;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  text-decoration: none;
+  border: none; /* No border */
+}
+
+.nav-button:hover {
+  color: black;
+  background-color: #108470;
+}
+
+@media (max-width: 768px) {
   .nav-buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .nav-button {
-    background-color: rgb(217, 1, 1);
-    color: white;
-    border: 2px solid transparent;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    text-decoration: none;
-  }
-  
-  .nav-button:hover {
-    border-color: white;
-  }
-  
-  @media (max-width: 768px) {
-    .nav-buttons {
-      display: none;
-    }
-  }
-  
-  .hamburger-menu {
     display: none;
   }
-  
-  @media (max-width: 768px) {
-    .hamburger-menu {
-      display: block;
-    }
+}
+
+.hamburger-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: block;
   }
-  
-  .menu-open .nav-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .menu-open .nav-button {
-    padding: 15px 20px;
-    width: auto;
-  }
-  
+}
+
+.menu-open .nav-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-open .nav-button {
+  padding: 15px 20px;
+  width: auto;
+}
+
+.divider {
+  border-left: 2px solid white;
+  height: 20px;
+  margin: 0 10px;
+}
+
+@media (max-width: 768px) {
   .divider {
-    border-left: 2px solid white;
-    height: 20px;
-    margin: 0 10px;
+    border-left: none;
+    border-top: 2px solid white;
+    width: 80%;
+    margin: 10px 0;
   }
-  
-  @media (max-width: 768px) {
-    .divider {
-      border-left: none;
-      border-top: 2px solid white;
-      width: 80%;
-      margin: 10px 0;
-    }
-  }
-  
+}

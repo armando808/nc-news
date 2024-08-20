@@ -1,98 +1,117 @@
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSun,
+  faMoon,
+  faBars,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
+import logo from "../assets/LI-News-teal.png";
 
 function Header({ isDarkMode, handleThemeToggle }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    const handleClickOutside = (event) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    setMenuOpen((prev) => !prev);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
   };
 
   const handleViewAllArticlesClick = () => {
-    navigate('/articles?topic=all');
+    navigate("/articles?topic=all");
+    closeMenu();
   };
 
   return (
-    <header className="bg-customRed text-white shadow-custom-lg sticky top-0 z-50">
+    <header className="bg-[#108470] text-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20 items-center">
-          <div className="flex-shrink-0">
-            <h1 className="text-3xl font-bold">NC News</h1>
+        <div className="flex justify-between h-24 items-center">
+          <div className="flex items-center space-x-4">
+            <img src={logo} alt="Logo" className="h-20 w-25" />
           </div>
-          <div className="hidden md:flex items-center space-x-4">
-            <Link to="/" className="hover:border-white border-transparent border-2 text-white font-semibold text-lg px-3 py-2 rounded-md transition duration-300">Home</Link>
+          <div className="flex items-center space-x-4 relative">
             <button
-              onClick={handleViewAllArticlesClick}
-              className="hover:border-white border-transparent border-2 text-white font-semibold text-lg px-3 py-2 rounded-md transition duration-300"
-            >
-              View All Articles
-            </button>
-            <div className="border-l-2 border-white h-6 mx-2"></div>
-            <button 
-              className="flex items-center border-2 border-transparent hover:border-white px-3 py-2 rounded-md transition duration-300 focus:outline-none"
-              onClick={handleThemeToggle}
-            >
-              {isDarkMode ? (
-                <>
-                  <FontAwesomeIcon icon={faSun} className="mr-2" /> Light Mode
-                </>
-              ) : (
-                <>
-                  <FontAwesomeIcon icon={faMoon} className="mr-2" /> Dark Mode
-                </>
-              )}
-            </button>
-          </div>
-          <div className="md:hidden">
-            <button 
-              className="flex items-center px-3 py-2 rounded-md transition duration-300 focus:outline-none"
+              ref={buttonRef}
+              className="flex items-center px-3 py-2 rounded-md transition duration-300 focus:outline-none text-white bg-[#108470]"
               onClick={toggleMenu}
             >
-              <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} className="text-white text-lg" />
+              <FontAwesomeIcon
+                icon={menuOpen ? faTimes : faBars}
+                className="text-white text-lg"
+              />
             </button>
+
+            {/* Dropdown menu */}
+            {menuOpen && (
+              <div
+                ref={menuRef}
+                className="absolute right-0 mt-0 w-48 bg-[#108470] rounded-md shadow-lg py-2 z-50 text-left"
+                style={{ top: "100%" }}
+              >
+                <Link
+                  to="/"
+                  className="block px-4 py-2 text-white rounded-md transition duration-300 bg-[#108470] hover:text-black"
+                  onClick={closeMenu}
+                >
+                  Home
+                </Link>
+                <button
+                  onClick={handleViewAllArticlesClick}
+                  className="block w-full text-left px-4 py-2 text-white rounded-md transition duration-300 bg-[#108470] hover:text-black"
+                >
+                  View All Articles
+                </button>
+                <button
+                  className="block w-full text-left px-4 py-2 text-white rounded-md transition duration-300 bg-[#108470] hover:text-black"
+                  onClick={() => {
+                    handleThemeToggle();
+                    closeMenu();
+                  }}
+                >
+                  {isDarkMode ? (
+                    <>
+                      <FontAwesomeIcon icon={faSun} className="mr-2" /> Light
+                      Mode
+                    </>
+                  ) : (
+                    <>
+                      <FontAwesomeIcon icon={faMoon} className="mr-2" /> Dark
+                      Mode
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
           </div>
         </div>
-        {menuOpen && (
-          <div className="md:hidden flex flex-col items-center space-y-4 mt-4">
-            <Link to="/" className="hover:border-white border-transparent border-2 text-white font-semibold text-lg px-3 py-2 rounded-md transition duration-300">Home</Link>
-            <button
-              onClick={handleViewAllArticlesClick}
-              className="hover:border-white border-transparent border-2 text-white font-semibold text-lg px-3 py-2 rounded-md transition duration-300"
-            >
-              View All Articles
-            </button>
-            <div className="border-t-2 border-white w-full"></div>
-            <button 
-              className="flex items-center border-2 border-transparent hover:border-white px-3 py-2 rounded-md transition duration-300 focus:outline-none"
-              onClick={handleThemeToggle}
-            >
-              {isDarkMode ? (
-                <>
-                  <FontAwesomeIcon icon={faSun} className="mr-2" /> Light Mode
-                </>
-              ) : (
-                <>
-                  <FontAwesomeIcon icon={faMoon} className="mr-2" /> Dark Mode
-                </>
-              )}
-            </button>
-          </div>
-        )}
       </div>
     </header>
   );
 }
 
 export default Header;
+

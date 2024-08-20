@@ -22,7 +22,7 @@
 
 .comment-form button {
     align-self: center !important;
-    background-color: rgb(217, 1, 1) !important;
+    background-color: #108470 !important;
     color: white !important;
     border: none !important;
     padding: 10px 20px !important;
@@ -34,12 +34,12 @@
 }
 
 .comment-form button:hover {
-    background-color: rgb(223, 2, 2) !important;
+    background-color: #108470 !important;
     color: white !important;
 }
 
 .toggle-button {
-    background-color: rgb(217, 1, 1) !important;
+    background-color: #108470 !important;
     color: white !important;
     border: none !important;
     padding: 10px 20px !important;
@@ -51,7 +51,7 @@
 }
 
 .toggle-button:hover {
-    background-color: rgb(223, 2, 2) !important;
+    background-color: #108470 !important;
     color: white !important;
 }
 
@@ -76,7 +76,7 @@
 
 .delete-button {
     align-self: flex-end !important;
-    background-color: rgb(217, 1, 1) !important;
+    background-color: #108470 !important;
     color: white !important;
     border: none !important;
     padding: 5px 10px !important;
@@ -87,6 +87,6 @@
 }
 
 .delete-button:hover {
-    background-color: rgb(223, 2, 2) !important;
+    background-color: #108470 !important;
     color: white !important;
 }
