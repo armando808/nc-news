@@ -13,8 +13,7 @@
 .select-container select {
   appearance: none;
   padding-right: 2.5rem;
-  border: 1px solid #ccc; /* Reset any custom borders */
-  outline: none;
+  border: 1px solid #ccc;
   box-shadow: none;
 }
 
