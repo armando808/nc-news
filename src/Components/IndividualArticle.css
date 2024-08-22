@@ -1,44 +1,38 @@
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.article-content {
+    width: 66.6666%;
+}
+
+.sidebar {
+    width: 33.3333%;
+    margin-left: 1.5rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .article-container {
-    max-width: 95%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
+    background-color: var(--bg-color);
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    margin-bottom: 30px;
-}
-
-.article-container h2 {
-    margin-bottom: 10px;
-    font-size: 1.5rem;
-    text-align: center;
-}
-
-.article-container p {
-    margin-bottom: 5px;
-    text-align: center;
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .img-container {
-    max-width: 30%;
-    margin: 0 auto 10px;
-    border-radius: 8px;
-    overflow: hidden;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
 .article-img {
-    width: 100%;
-    height: auto;
-    display: block;
+    max-width: 100%;
     border-radius: 8px;
 }
 
 .votes-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-
-.header-row {
-    margin-top: 20px;
+    margin-top: 1.5rem;
 }

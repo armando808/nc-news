@@ -1,0 +1,16 @@
+.recent-articles {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .recent-article-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .recent-article-card:hover {
+    background-color: var(--hover-bg-color);
+  }
+  
