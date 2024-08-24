@@ -45,7 +45,7 @@ function IndividualArticle() {
             <section className="min-h-screen bg-white dark:bg-customDark text-gray-900 dark:text-white">
                 <Header isDarkMode={isDarkMode} handleThemeToggle={handleThemeToggle} />
                 <div className="content-wrapper flex px-5">
-                    <div className="article-content w-2/3 mr-6"> {/* Adjusted width */}
+                    <div className="article-content w-2/3 mr-6">
                         {isLoading ? (
                             <div className="flex flex-col items-center justify-center h-64">
                                 <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status"></div>

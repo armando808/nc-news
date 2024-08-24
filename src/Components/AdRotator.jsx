@@ -4,7 +4,7 @@ import Ad70Off from "../assets/Ad-70-off.png";
 import AdReachPeople from "../assets/Ad-reach-people.png";
 
 function AdRotator() {
-  const [currentAdIndex, setCurrentAdIndex] = useState(1);
+  const [currentAdIndex, setCurrentAdIndex] = useState(0);
 
   const ads = [Ad70Off, AdReachPeople];
 
@@ -18,16 +18,11 @@ function AdRotator() {
 
   return (
     <div className="ad-rotator-container">
-      {ads.map((ad, index) => (
-        <iframe
-          key={index}
-          src={ad}
-          title={`Ad ${index + 1}`}
-          className={`ad-iframe ${index === currentAdIndex ? 'active' : ''}`}
-          frameBorder="0"
-          scrolling="no"
-        />
-      ))}
+      <img
+        src={ads[currentAdIndex]}
+        alt={`Ad ${currentAdIndex + 1}`}
+        className="ad-img"
+      />
     </div>
   );
 }
