@@ -1,4 +1,3 @@
-// Updated RecentArticles.js
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -18,7 +17,6 @@ function RecentArticles() {
         const response = await ncNewsAPI.get('/articles');
         const articles = response.data.articles;
 
-        // Group articles by topic and take the latest 3 from each topic
         const groupedArticles = articles.reduce((acc, article) => {
           if (!acc[article.topic]) {
             acc[article.topic] = [];

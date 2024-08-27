@@ -62,7 +62,6 @@ h2 {
   margin: 0 auto;
 }
 
-
 .topic-tile {
   position: relative;
   overflow: hidden;
@@ -76,12 +75,12 @@ h2 {
 .topic-tile img {
   display: block;
   width: 100%;
+  object-fit: cover;
   height: auto;
   margin-top: 20px;
   position: relative;
   z-index: 5;
 }
-
 
 .topic-tile-header {
   background-color: #118470;
@@ -276,4 +275,10 @@ h2 {
 .dark .side-title {
   background-color: #118470;
   color: white;
+}
+
+.main-article img {
+  height: 300px;
+  object-fit: cover;
+  width: 100%;
 }
