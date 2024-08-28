@@ -113,13 +113,14 @@ function HomePage() {
     return title
       .split(" ")
       .map((word) => {
-        if (word.length > 3 && word === word.toUpperCase()) {
-          return word
-            .toLowerCase()
-            .replace(/\b\w/g, (char) => char.toUpperCase());
+        if (word === "APIs") {
+          return word;
         }
         if (word.toLowerCase() === "fc") {
           return "FC";
+        }
+        if (word.length > 1 && word.toUpperCase() === word) {
+          return word.charAt(0) + word.slice(1).toLowerCase();
         }
         if (word.includes("'")) {
           const parts = word.split("'");
