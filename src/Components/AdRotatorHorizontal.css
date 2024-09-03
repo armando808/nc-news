@@ -1,0 +1,12 @@
+.ad-horizontal-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .ad-horizontal-img {
+    width: 100%;
+    height: auto;
+  }
+  

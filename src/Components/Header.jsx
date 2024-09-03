@@ -1,12 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSun,
-  faMoon,
-  faBars,
-  faTimes,
-} from "@fortawesome/free-solid-svg-icons";
+import { faSun, faMoon, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/LI-News-teal.png";
 
 function Header({ isDarkMode, handleThemeToggle }) {
@@ -47,7 +42,7 @@ function Header({ isDarkMode, handleThemeToggle }) {
   };
 
   return (
-    <header className="bg-[#108470] text-white shadow-lg sticky top-0 z-50">
+    <header className="bg-[#108470] text-white shadow-lg sticky top-0 z-[500]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-24 items-center">
           <div className="flex items-center space-x-4">
@@ -65,28 +60,27 @@ function Header({ isDarkMode, handleThemeToggle }) {
               />
             </button>
 
-            {/* Dropdown menu */}
             {menuOpen && (
               <div
                 ref={menuRef}
-                className="absolute right-0 mt-0 w-48 bg-[#108470] rounded-md shadow-lg py-2 z-50 text-left"
+                className="absolute right-0 mt-0 w-48 bg-[#108470] rounded-md shadow-lg py-2 z-[600] text-left"
                 style={{ top: "100%" }}
               >
                 <Link
                   to="/"
-                  className="block px-4 py-2 text-white rounded-md transition duration-300 bg-[#108470] hover:text-black"
+                  className="block px-4 py-2 text-white rounded-md transition duration-300 bg-[#108470] hover:text-black hover:bg-white"
                   onClick={closeMenu}
                 >
                   Home
                 </Link>
                 <button
                   onClick={handleViewAllArticlesClick}
-                  className="block w-full text-left px-4 py-2 text-white rounded-md transition duration-300 bg-[#108470] hover:text-black"
+                  className="block w-full text-left px-4 py-2 text-white rounded-md transition duration-300 bg-[#108470] hover:text-black hover:bg-white"
                 >
                   View All Articles
                 </button>
                 <button
-                  className="block w-full text-left px-4 py-2 text-white rounded-md transition duration-300 bg-[#108470] hover:text-black"
+                  className="block w-full text-left px-4 py-2 text-white rounded-md transition duration-300 bg-[#108470] hover:text-black hover:bg-white"
                   onClick={() => {
                     handleThemeToggle();
                     closeMenu();
@@ -114,4 +108,3 @@ function Header({ isDarkMode, handleThemeToggle }) {
 }
 
 export default Header;
-
