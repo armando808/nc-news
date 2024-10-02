@@ -1,20 +1,12 @@
-import { useState, useEffect } from "react";
-import "./AdRotator.css";
-import Ad70Off from "../assets/Ad-70-off.png";
-import AdReachPeople from "../assets/Ad-reach-people.png";
+import { useState } from "react"
+import "./AdRotator.css"
+import { ads } from "../utils/adData"
+import { useAdRotation } from "../utils/adRotatorUtils"
 
 function AdRotator() {
-  const [currentAdIndex, setCurrentAdIndex] = useState(0);
+  const [currentAdIndex, setCurrentAdIndex] = useState(0)
 
-  const ads = [Ad70Off, AdReachPeople];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentAdIndex((prevIndex) => (prevIndex + 1) % ads.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [ads.length]);
+  useAdRotation(ads.length, setCurrentAdIndex)
 
   return (
     <div className="ad-rotator-container">
@@ -24,7 +16,7 @@ function AdRotator() {
         className="ad-img"
       />
     </div>
-  );
+  )
 }
 
-export default AdRotator;
+export default AdRotator

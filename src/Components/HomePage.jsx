@@ -1,153 +1,31 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFireAlt, faClock, faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import Header from "./Header";
-import AdRotator from "./AdRotator";
-import AdRotatorHorizontal from "./AdRotatorHorizontal";
-import "./HomePage.css";
+import { Link } from "react-router-dom"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faFireAlt, faClock, faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import { useFetchTopics } from '../hooks/useFetchTopics'
+import { useFetchArticles } from '../hooks/useFetchArticles'
+import { useTheme } from '../context/ThemeContext'
+import { capitalizeTitle, truncateTitle } from '../utils/utils'
+import Header from "./Header"
+import AdRotator from "./AdRotator"
+import AdRotatorHorizontal from "./AdRotatorHorizontal"
+import { useArticleView } from "../hooks/useArticleView"
+import { useIndexNavigation } from "../hooks/useIndexNavigation"
+import "./HomePage.css"
 
 function HomePage() {
-  const [topics, setTopics] = useState([]);
-  const [selectedView, setSelectedView] = useState("popular");
-  const [articles, setArticles] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem("theme") === "dark");
-  const [currentArticleIndex, setCurrentArticleIndex] = useState({});
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchTopics = async () => {
-      try {
-        const response = await axios.get("https://nc-news-be-project-1.onrender.com/api/topics");
-        setTopics(response.data.topics);
-      } catch (err) {
-        console.error(err);
-        setError(
-          err.response && err.response.data && err.response.data.msg
-            ? err.response.data.msg
-            : err.message
-        );
-        setIsLoading(false);
-      }
-    };
-
-    fetchTopics();
-  }, []);
-
-  useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        const articlePromises = topics.map(async (topic) => {
-          const response = await axios.get("https://nc-news-be-project-1.onrender.com/api/articles", {
-            params: {
-              topic: topic.slug,
-              sort_by: selectedView === "popular" ? "votes" : "created_at",
-              order: "desc",
-            },
-          });
-          return { topic: topic.slug, articles: response.data.articles };
-        });
-        const articlesByTopic = await Promise.all(articlePromises);
-        const articlesObject = {};
-        articlesByTopic.forEach(({ topic, articles }) => {
-          articlesObject[topic] = articles;
-        });
-        setArticles(articlesObject);
-        setIsLoading(false);
-      } catch (err) {
-        console.error(err);
-        setError(
-          err.response && err.response.data && err.response.data.msg
-            ? err.response.data.msg
-            : err.message
-        );
-        setIsLoading(false);
-      }
-    };
-
-    if (topics.length > 0) {
-      fetchArticles();
-    }
-  }, [topics, selectedView]);
-
-  useEffect(() => {
-    const initialIndexes = {};
-    topics.forEach((topic) => {
-      initialIndexes[topic.slug] = 0;
-    });
-    setCurrentArticleIndex(initialIndexes);
-  }, [topics]);
-
-  const handleViewChange = (view) => {
-    setSelectedView(view);
-
-    const resetIndexes = {};
-    topics.forEach((topic) => {
-      resetIndexes[topic.slug] = 0;
-    });
-    setCurrentArticleIndex(resetIndexes);
-  };
-
-  const handleThemeToggle = () => {
-    const newTheme = !isDarkMode ? "dark" : "light";
-    setIsDarkMode(!isDarkMode);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark");
-  };
-
-  const capitalizeTitle = (title) => {
-    return title
-      .split(" ")
-      .map((word) => {
-        if (word === "APIs") {
-          return word;
-        }
-        if (word.toLowerCase() === "fc") {
-          return "FC";
-        }
-        if (word.length > 1 && word.toUpperCase() === word) {
-          return word.charAt(0) + word.slice(1).toLowerCase();
-        }
-        if (word.includes("'")) {
-          const parts = word.split("'");
-          return parts
-            .map((part, index) => (index === 0 ? capitalize(part) : part))
-            .join("'");
-        }
-        return capitalize(word);
-      })
-      .join(" ");
-  };
-
-  const capitalize = (word) => {
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-  };
-
-  const handleNextArticle = (topicSlug) => {
-    setCurrentArticleIndex((prevIndexes) => ({
-      ...prevIndexes,
-      [topicSlug]: (prevIndexes[topicSlug] + 1) % articles[topicSlug].length,
-    }));
-  };
-
-  const handlePreviousArticle = (topicSlug) => {
-    setCurrentArticleIndex((prevIndexes) => ({
-      ...prevIndexes,
-      [topicSlug]: (prevIndexes[topicSlug] - 1 + articles[topicSlug].length) % articles[topicSlug].length,
-    }));
-  };
-
-  const truncateTitle = (title, maxLength) => {
-    return title.length > maxLength ? title.slice(0, maxLength - 3) + '...' : title;
-  };
+  const { isDarkMode, toggleTheme } = useTheme()
+  
+  const { selectedView, handleViewChange } = useArticleView("popular")
+  
+  const { topics, isLoading: isTopicsLoading, error: topicsError } = useFetchTopics()
+  const { articles, isLoading: isArticlesLoading, error: articlesError } = useFetchArticles(selectedView, topics)
+  
+  const { currentArticleIndex, handleNextArticle, handlePreviousArticle } = useIndexNavigation(topics, articles)
 
   return (
     <div className={isDarkMode ? "dark" : ""}>
       <section className="min-h-screen bg-white dark:bg-customDark text-gray-900 dark:text-white">
-        <Header isDarkMode={isDarkMode} handleThemeToggle={handleThemeToggle} />
+        <Header isDarkMode={isDarkMode} handleThemeToggle={toggleTheme} />
         <div className="flex justify-center items-start relative">
           <div className="ad-container left-ad">
             <AdRotator />
@@ -184,14 +62,13 @@ function HomePage() {
                 </button>
               </div>
             </div>
-            <h3 className="topics-header text-xl font-bold text-center mt-2 mb-2">Topics</h3>
-            {isLoading ? (
+            {isTopicsLoading || isArticlesLoading ? (
               <div className="flex flex-col items-center justify-center h-64">
                 <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status"></div>
                 <p className="loading-message">Loading... Please wait up to ~1 min for server to initialise</p>
               </div>
-            ) : error ? (
-              <p>Error: {error}</p>
+            ) : topicsError || articlesError ? (
+              <p>Error: {topicsError || articlesError}</p>
             ) : (
               <div className="topics-container-inner flex flex-col gap-5 justify-center w-full box-border px-5 mx-auto">
                 {topics.map((topic) => (
@@ -235,7 +112,7 @@ function HomePage() {
                             >
                               {truncateTitle(capitalizeTitle(articles[topic.slug][index].title), 40)}
                             </Link>
-                          );
+                          )
                         })}
                       </div>
                     </div>
@@ -251,7 +128,7 @@ function HomePage() {
         </div>
       </section>
     </div>
-  );
+  )
 }
 
-export default HomePage;
+export default HomePage

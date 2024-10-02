@@ -1,30 +1,22 @@
-import { useState, useEffect } from "react";
-import "./AdRotatorHorizontal.css";
-import AdHorizontal70Off from "../assets/Ad-horizontal-70.png";
-import AdHorizontalReach from "../assets/Ad-horizontal-reach.png";
+import { useState } from "react"
+import "./AdRotatorHorizontal.css"
+import { horizontalAds } from "../utils/adData"
+import { useAdRotation } from "../utils/adRotatorUtils"
 
 function AdRotatorHorizontal() {
-  const [currentAdIndex, setCurrentAdIndex] = useState(0);
+  const [currentAdIndex, setCurrentAdIndex] = useState(0)
 
-  const ads = [AdHorizontal70Off, AdHorizontalReach];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentAdIndex((prevIndex) => (prevIndex + 1) % ads.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [ads.length]);
+  useAdRotation(horizontalAds.length, setCurrentAdIndex)
 
   return (
     <div className="ad-horizontal-container">
       <img
-        src={ads[currentAdIndex]}
+        src={horizontalAds[currentAdIndex]}
         alt={`Ad ${currentAdIndex + 1}`}
         className="ad-horizontal-img"
       />
     </div>
-  );
+  )
 }
 
-export default AdRotatorHorizontal;
+export default AdRotatorHorizontal
