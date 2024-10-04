@@ -10,7 +10,7 @@ export const useFetchTopics = () => {
     const getTopics = async () => {
         try {
         const topicsData = await fetchTopics()
-        setTopics(topicsData)
+        setTopics(Array.isArray(topicsData) ? topicsData : [])
         setIsLoading(false)
         } catch (err) {
         setError(err.message)
