@@ -1,33 +1,34 @@
-import { Link } from "react-router-dom"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFireAlt, faClock, faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons"
-import { useFetchTopics } from '../hooks/useFetchTopics'
-import { useFetchArticles } from '../hooks/useFetchArticles'
-import { useTheme } from '../context/ThemeContext'
-import { capitalizeTitle, truncateTitle } from '../utils/utils'
-import Header from "./Header"
-import AdRotator from "./AdRotator"
-import AdRotatorHorizontal from "./AdRotatorHorizontal"
-import { useArticleView } from "../hooks/useArticleView"
-import { useIndexNavigation } from "../hooks/useIndexNavigation"
-import "./HomePage.css"
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useFetchTopics } from '../hooks/useFetchTopics';
+import { useFetchArticles } from '../hooks/useFetchArticles';
+import { useTheme } from '../context/ThemeContext';
+import { capitalizeTitle, truncateTitle } from '../utils/utils';
+import Header from "./Header";
+import AdRotator from "./AdRotator";
+import AdRotatorHorizontal from "./AdRotatorHorizontal";
+import { useArticleView } from "../hooks/useArticleView";
+import { useIndexNavigation } from "../hooks/useIndexNavigation";
+import ToggleViewButtons from "./ToggleViewButtons";
+import "./HomePage.css";
 
 function HomePage() {
-  const { isDarkMode, toggleTheme } = useTheme()
-  const { selectedView, handleViewChange } = useArticleView("popular")
-  const { topics, isLoading: isTopicsLoading, error: topicsError } = useFetchTopics()
-  const { articles, isLoading: isArticlesLoading, error: articlesError } = useFetchArticles(selectedView, null)
+  const { isDarkMode, toggleTheme } = useTheme();
+  const { selectedView, handleViewChange } = useArticleView("popular");
+  const { topics, isLoading: isTopicsLoading, error: topicsError } = useFetchTopics();
+  const { articles, isLoading: isArticlesLoading, error: articlesError } = useFetchArticles(selectedView, null);
 
   const groupedArticles = articles.reduce((acc, article) => {
-    const { topic } = article
+    const { topic } = article;
     if (!acc[topic]) {
-      acc[topic] = []
+      acc[topic] = [];
     }
-    acc[topic].push(article)
-    return acc
-  }, {})
+    acc[topic].push(article);
+    return acc;
+  }, {});
 
-  const { currentArticleIndex, handleNextArticle, handlePreviousArticle } = useIndexNavigation(topics, groupedArticles)
+  const { currentArticleIndex, handleNextArticle, handlePreviousArticle } = useIndexNavigation(topics, groupedArticles);
 
   if (isTopicsLoading || isArticlesLoading) {
     return (
@@ -35,11 +36,11 @@ function HomePage() {
         <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status"></div>
         <p className="loading-message">Loading... Please wait up to ~1 min for server to initialise</p>
       </div>
-    )
+    );
   }
 
   if (topicsError || articlesError) {
-    return <p>Error: {topicsError || articlesError}</p>
+    return <p>Error: {topicsError || articlesError}</p>;
   }
 
   return (
@@ -55,32 +56,7 @@ function HomePage() {
               <h2 className="text-2xl font-bold mb-4 md:mb-0">
                 {selectedView === "popular" ? "Top Articles" : "Newest Articles"}
               </h2>
-              <div className="toggle-view flex gap-2">
-                <button
-                  className={`toggle-button text-white px-3 py-2 rounded-md transition duration-300 ${
-                    selectedView === "popular" ? "font-bold border-white border-2" : "font-normal"
-                  }`}
-                  onClick={() => handleViewChange("popular")}
-                >
-                  <span className="hidden sm:inline">Most Popular</span>
-                  <FontAwesomeIcon
-                    icon={faFireAlt}
-                    className={`transition-all sm:hidden ${selectedView === "popular" ? "text-3xl" : "text-sm"}`}
-                  />
-                </button>
-                <button
-                  className={`toggle-button text-white px-3 py-2 rounded-md transition duration-300 ${
-                    selectedView === "newest" ? "font-bold border-white border-2" : "font-normal"
-                  }`}
-                  onClick={() => handleViewChange("newest")}
-                >
-                  <span className="hidden sm:inline">Newest</span>
-                  <FontAwesomeIcon
-                    icon={faClock}
-                    className={`transition-all sm:hidden ${selectedView === "newest" ? "text-3xl" : "text-sm"}`}
-                  />
-                </button>
-              </div>
+              <ToggleViewButtons selectedView={selectedView} handleViewChange={handleViewChange} />
             </div>
 
             <div className="topics-container-inner flex flex-col gap-5 justify-center w-full box-border px-5 mx-auto">
@@ -146,7 +122,7 @@ function HomePage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;
